@@ -1,0 +1,27 @@
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-control{
+  width:100%;
+  padding:8px;
+}
+
+.error-feedback{
+  color:red;
+  font-size:13px;
+}
+
+.btn{
+  padding:8px 14px;
+}
+
+.btn-primary{
+  background:#007bff;
+  color:white;
+}
+
+.btn-danger{
+  background:red;
+  color:white;
+}
