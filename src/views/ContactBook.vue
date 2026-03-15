@@ -26,12 +26,12 @@
         <i class="fas fa-redo"></i> Làm mới
       </button>
 
-      <button
+      <router-link
+        :to="{ name: 'contact.add' }"
         class="btn btn-sm btn-success"
-        @click="goToAddContact"
       >
         <i class="fas fa-plus"></i> Thêm mới
-      </button>
+      </router-link>
 
       <button
         class="btn btn-sm btn-danger"
@@ -51,10 +51,9 @@
     <ContactCard :contact="activeContact" />
     <router-link
       :to="{ name: 'contact.edit', params: { id: activeContact._id } }"
+      class="btn btn-warning"
     >
-      <span class="mt-2 badge badge-warning">
-        <i class="fas fa-edit"></i> Hiệu chỉnh
-      </span>
+      <i class="fas fa-edit"></i> Hiệu chỉnh
     </router-link>
   </div>
 </div>
