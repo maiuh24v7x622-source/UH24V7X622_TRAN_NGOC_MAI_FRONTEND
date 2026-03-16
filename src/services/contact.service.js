@@ -1,8 +1,18 @@
 import createApiClient from "./api.service";
+import AuthService from "./auth.service";
 
 class ContactService {
   constructor(baseUrl = "/api/contacts") {
     this.api = createApiClient(baseUrl);
+
+    // Thêm interceptor để tự động gửi token nếu có
+    this.api.interceptors.request.use((config) => {
+      const token = AuthService.getToken();
+      if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+      }
+      return config;
+    });
   }
 
   async getAll() {

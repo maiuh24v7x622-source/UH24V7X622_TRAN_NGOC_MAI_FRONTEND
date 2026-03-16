@@ -99,9 +99,13 @@ computed: {
   filteredContacts() {
     if (!this.searchText) return this.contacts;
 
-    return this.contacts.filter((_contact, index) =>
-      this.contactStrings[index].includes(this.searchText)
-    );
+    // Tách các từ trong searchText, loại bỏ khoảng trắng thừa
+    const keywords = this.searchText.toLowerCase().split(/\s+/).filter(Boolean);
+    return this.contacts.filter((_contact, index) => {
+      const str = this.contactStrings[index].toLowerCase();
+      // Chỉ cần liên hệ chứa bất kỳ từ nào trong searchText
+      return keywords.some(word => str.includes(word));
+    });
   },
 
   activeContact() {
@@ -119,7 +123,12 @@ methods: {
     try {
       this.contacts = await ContactService.getAll();
     } catch (error) {
-      console.log(error);
+      // Log chi tiết lỗi để kiểm tra
+      if (error.response) {
+        console.log('Lỗi lấy danh bạ:', error.response.status, error.response.data);
+      } else {
+        console.log(error);
+      }
     }
   },
 
